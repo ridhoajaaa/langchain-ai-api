@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: langchain-ai-api
+    runtime: python
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port 10000
+    plan: free
+    branch: main
+    healthCheckPath: /health
+    envVars:
+      - key: OLLAMA_MODEL
+        value: qwen3-coder-next:cloud
+      - key: OLLAMA_BASE_URL
+        value: http://localhost:11434
